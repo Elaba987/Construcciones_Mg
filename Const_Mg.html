@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construcciones Magdaleno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover {
+            color: #d4a574;
+        }
+
+        .admin-btn {
+            background: #d4a574;
+            color: #0f172a;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .admin-btn:hover {
+            background: #f5e6d3;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #d4a574;
+            margin: 1rem auto;
+        }
+
+        .about-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: white;
+            color: #0f172a;
+            padding: 0.7rem 1.5rem;
+            border: 2px solid #d4a574;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #d4a574;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .trabajos-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .trabajo-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .trabajo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .trabajo-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .trabajo-content {
+            padding: 1.5rem;
+        }
+
+        .trabajo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .trabajo-title {
+            font-size: 1.5rem;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .trabajo-category {
+            background: #d4a574;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .trabajo-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .trabajo-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            color: #0f172a;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 0.5rem 0;
+        }
+
+        .contact-phone {
+            color: #d4a574;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 99;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #0f172a;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: #d4a574;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #1e3a8a;
+        }
+
+        .btn-secondary {
+            background: #666;
+            margin-left: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: #333;
+        }
+
+        .btn-danger {
+            background: #dc2626;
+        }
+
+        .btn-danger:hover {
+            background: #991b1b;
+        }
+
+        .admin-panel {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .admin-section {
+            background: #f5e6d3;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .admin-section h3 {
+            color: #0f172a;
+            margin-bottom: 1rem;
+        }
+
+        .category-list, .trabajo-admin-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .category-item, .trabajo-admin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <span class="logo-icon" id="logoIcon">🏗️</span>
+                <span>Construcciones Magdaleno</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a onclick="scrollToSection('inicio')">Inicio</a></li>
+                <li><a onclick="scrollToSection('conocenos')">Conócenos</a></li>
+                <li><a onclick="scrollToSection('trabajos')">Trabajos</a></li>
+                <li><a onclick="scrollToSection('contacto')">Contáctanos</a></li>
+                <li><button class="admin-btn" onclick="openAdminLogin()">👤 Admin</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <h1>Construcciones Magdaleno</h1>
+        <p>Calidad y profesionalismo en cada proyecto</p>
+    </section>
+
+    <section id="conocenos" class="container">
+        <h2 class="section-title">Conócenos</h2>
+        <div class="about-content" id="aboutContent">
+            <p>En Construcciones Magdaleno nos especializamos en brindar servicios de construcción de alta calidad. Con años de experiencia en el sector, nuestro equipo de profesionales está comprometido con la excelencia en cada proyecto que emprendemos.</p>
+            <p>Nos enorgullece ofrecer soluciones integrales que van desde remodelaciones hasta obras nuevas, siempre con un enfoque en la satisfacción del cliente y el cumplimiento de los más altos estándares de calidad.</p>
+        </div>
+    </section>
+
+    <section id="trabajos" class="container">
+        <h2 class="section-title">Nuestros Trabajos</h2>
+        <div class="filters" id="filters"></div>
+        <div class="trabajos-grid" id="trabajosGrid"></div>
+    </section>
+
+    <section id="contacto" class="container">
+        <h2 class="section-title">Contáctanos</h2>
+        <div class="contact-info">
+            <h3 id="contactTitle">¿Listo para comenzar tu proyecto?</h3>
+            <p id="contactText">Contáctanos y solicita una cotización sin compromiso. Estamos aquí para convertir tus ideas en realidad.</p>
+            <p class="contact-phone">📞 562-430-6442</p>
+        </div>
+    </section>
+
+    <a href="https://wa.me/5215624306442" target="_blank" class="whatsapp-float">💬</a>
+
+    <!-- Modal de Login Admin -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Acceso Administrador</h2>
+                <button class="close-btn" onclick="closeModal('adminLoginModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <input type="password" id="adminPassword" placeholder="Ingresa la contraseña">
+            </div>
+            <button class="btn" onclick="login()">Ingresar</button>
+        </div>
+    </div>
+
+    <!-- Modal Panel Admin -->
+    <div id="adminPanelModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Panel de Administración</h2>
+                <button class="close-btn" onclick="closeModal('adminPanelModal')">&times;</button>
+            </div>
+            <div class="admin-panel">
+                <div class="admin-section">
+                    <h3>Logo</h3>
+                    <div class="form-group">
+                        <label>Emoji o URL del logo:</label>
+                        <input type="text" id="logoInput" placeholder="🏗️ o https://...">
+                    </div>
+                    <button class="btn" onclick="updateLogo()">Actualizar Logo</button>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Sección "Conócenos"</h3>
+                    <div class="form-group">
+                        <textarea id="aboutInput"></textarea>
+                    </div>
+                    <button class="btn" onclick="updateAbout()">Actualizar</button>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Sección "Contáctanos"</h3>
+                    <div class="form-group">
+                        <label>Título:</label>
+                        <input type="text" id="contactTitleInput">
+                    </div>
+                    <div class="form-group">
+                        <label>Texto:</label>
+                        <textarea id="contactTextInput"></textarea>
+                    </div>
+                    <button class="btn" onclick="updateContact()">Actualizar</button>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Categorías</h3>
+                    <div class="form-group">
+                        <input type="text" id="newCategoryInput" placeholder="Nueva categoría">
+                    </div>
+                    <button class="btn" onclick="addCategory()">Agregar Categoría</button>
+                    <ul class="category-list" id="categoryList"></ul>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Trabajos</h3>
+                    <button class="btn" onclick="openTrabajoForm()">Agregar Nuevo Trabajo</button>
+                    <ul class="trabajo-admin-list" id="trabajoAdminList"></ul>
+                </div>
+
+                <button class="btn btn-secondary" onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Trabajo Form -->
+    <div id="trabajoFormModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="trabajoFormTitle">Agregar Trabajo</h2>
+                <button class="close-btn" onclick="closeModal('trabajoFormModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>Título:</label>
+                <input type="text" id="trabajoTitle" placeholder="Ej: Remodelación de Casa">
+            </div>
+            <div class="form-group">
+                <label>Descripción:</label>
+                <textarea id="trabajoDescription" placeholder="Describe el trabajo realizado..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Categoría:</label>
+                <select id="trabajoCategory"></select>
+            </div>
+            <div class="form-group">
+                <label>Fecha de realización:</label>
+                <input type="date" id="trabajoDate">
+            </div>
+            <div class="form-group">
+                <label>URL de la imagen:</label>
+                <input type="text" id="trabajoImage" placeholder="https://...">
+            </div>
+            <button class="btn" onclick="saveTrabajo()">Guardar</button>
+            <button class="btn btn-secondary" onclick="closeModal('trabajoFormModal')">Cancelar</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Construcciones Magdaleno. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Estado de la aplicación en memoria
+        let state = {
+            isAdmin: false,
+            logo: '🏗️',
+            aboutText: '<p>En Construcciones Magdaleno nos especializamos en brindar servicios de construcción de alta calidad. Con años de experiencia en el sector, nuestro equipo de profesionales está comprometido con la excelencia en cada proyecto que emprendemos.</p><p>Nos enorgullece ofrecer soluciones integrales que van desde remodelaciones hasta obras nuevas, siempre con un enfoque en la satisfacción del cliente y el cumplimiento de los más altos estándares de calidad.</p>',
+            contactTitle: '¿Listo para comenzar tu proyecto?',
+            contactText: 'Contáctanos y solicita una cotización sin compromiso. Estamos aquí para convertir tus ideas en realidad.',
+            categories: ['Remodelación', 'Obra Nueva', 'Pintura', 'Plomería', 'Electricidad', 'Albañilería'],
+            trabajos: [
+                {
+                    id: 1,
+                    title: 'Remodelación Completa de Cocina',
+                    description: 'Transformamos una cocina antigua en un espacio moderno y funcional con acabados de primera calidad.',
+                    category: 'Remodelación',
+                    date: '2024-11-15',
+                    image: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?w=800'
+                },
+                {
+                    id: 2,
+                    title: 'Construcción de Casa Residencial',
+                    description: 'Obra nueva de 180m² con diseño contemporáneo, 3 recámaras y acabados premium.',
+                    category: 'Obra Nueva',
+                    date: '2024-10-20',
+                    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800'
+                },
+                {
+                    id: 3,
+                    title: 'Pintura Exterior e Interior',
+                    description: 'Servicio completo de pintura con preparación de superficies y acabado profesional.',
+                    category: 'Pintura',
+                    date: '2024-12-05',
+                    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800'
+                }
+            ],
+            currentFilter: 'Todas',
+            editingTrabajoId: null
+        };
+
+        // Funciones de navegación
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Funciones de modal
+        function openAdminLogin() {
+            document.getElementById('adminLoginModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Login
+        function login() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'admin123') {
+                state.isAdmin = true;
+                closeModal('adminLoginModal');
+                openAdminPanel();
+                document.getElementById('adminPassword').value = '';
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        }
+
+        function logout() {
+            state.isAdmin = false;
+            closeModal('adminPanelModal');
+        }
+
+        // Panel Admin
+        function openAdminPanel() {
+            document.getElementById('logoInput').value = state.logo;
+            document.getElementById('aboutInput').value = state.aboutText.replace(/<\/?p>/g, '');
+            document.getElementById('contactTitleInput').value = state.contactTitle;
+            document.getElementById('contactTextInput').value = state.contactText;
+            renderCategoryList();
+            renderTrabajoAdminList();
+            document.getElementById('adminPanelModal').classList.add('active');
+        }
+
+        // Actualizar Logo
+        function updateLogo() {
+            const newLogo = document.getElementById('logoInput').value.trim();
+            if (newLogo) {
+                state.logo = newLogo;
+                if (newLogo.startsWith('http')) {
+                    document.getElementById('logoIcon').innerHTML = `<img src="${newLogo}" style="width: 2rem; height: 2rem;">`;
+                } else {
+                    document.getElementById('logoIcon').textContent = newLogo;
+                }
+                alert('Logo actualizado');
+            }
+        }
+
+        // Actualizar About
+        function updateAbout() {
+            const newText = document.getElementById('aboutInput').value.trim();
+            if (newText) {
+                state.aboutText = `<p>${newText}</p>`;
+                document.getElementById('aboutContent').innerHTML = state.aboutText;
+                alert('Sección actualizada');
+            }
+        }
+
+        // Actualizar Contact
+        function updateContact() {
+            const newTitle = document.getElementById('contactTitleInput').value.trim();
+            const newText = document.getElementById('contactTextInput').value.trim();
+            if (newTitle && newText) {
+                state.contactTitle = newTitle;
+                state.contactText = newText;
+                document.getElementById('contactTitle').textContent = state.contactTitle;
+                document.getElementById('contactText').textContent = state.contactText;
+                alert('Sección actualizada');
+            }
+        }
+
+        // Categorías
+        function addCategory() {
+            const newCategory = document.getElementById('newCategoryInput').value.trim();
+            if (newCategory && !state.categories.includes(newCategory)) {
+                state.categories.push(newCategory);
+                document.getElementById('newCategoryInput').value = '';
+                renderCategoryList();
+                renderFilters();
+                alert('Categoría agregada');
+            }
+        }
+
+        function deleteCategory(category) {
+            if (confirm(`¿Eliminar categoría "${category}"?`)) {
+                state.categories = state.categories.filter(c => c !== category);
+                renderCategoryList();
+                renderFilters();
+            }
+        }
+
+        function renderCategoryList() {
+            const list = document.getElementById('categoryList');
+            list.innerHTML = state.categories.map(cat => `
+                <li class="category-item">
+                    <span>${cat}</span>
+                    <button class="btn btn-danger" style="padding: 0.3rem 0.8rem;" onclick="deleteCategory('${cat}')">Eliminar</button>
+                </li>
+            `).join('');
+        }
+
+        // Trabajos
+        function openTrabajoForm(trabajoId = null) {
+            state.editingTrabajoId = trabajoId;
+            const categorySelect = document.getElementById('trabajoCategory');
+            categorySelect.innerHTML = state.categories.map(cat => 
+                `<option value="${cat}">${cat}</option>`
+            ).join('');
+
+            if (trabajoId) {
+                const trabajo = state.trabajos.find(t => t.id === trabajoId);
+                document.getElementById('trabajoFormTitle').textContent = 'Editar Trabajo';
+                document.getElementById('trabajoTitle').value = trabajo.title;
+                document.getElementById('trabajoDescription').value = trabajo.description;
+                document.getElementById('trabajoCategory').value = trabajo.category;
+                document.getElementById('trabajoDate').value = trabajo.date;
+                document.getElementById('trabajoImage').value = trabajo.image;
+            } else {
+                document.getElementById('trabajoFormTitle').textContent = 'Agregar Trabajo';
+                document.getElementById('trabajoTitle').value = '';
+                document.getElementById('trabajoDescription').value = '';
+                document.getElementById('trabajoDate').value = '';
+                document.getElementById('trabajoImage').value = '';
+            }
+
+            document.getElementById('trabajoFormModal').classList.add('active');
+        }
+
+        function saveTrabajo() {
+            const title = document.getElementById('trabajoTitle').value.trim();
+            const description = document.getElementById('trabajoDescription').value.trim();
+            const category = document.getElementById('trabajoCategory').value;
+            const date = document.getElementById('trabajoDate').value;
+            const image = document.getElementById('trabajoImage').value.trim();
+
+            if (!title || !description || !date || !image) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+
+            if (state.editingTrabajoId) {
+                const index = state.trabajos.findIndex(t => t.id === state.editingTrabajoId);
+                state.trabajos[index] = {
+                    ...state.trabajos[index],
+                    title, description, category, date, image
+                };
+            } else {
+                const newId = Math.max(...state.trabajos.map(t => t.id), 0) + 1;
+                state.trabajos.push({ id: newId, title, description, category, date, image });
+            }
+
+            closeModal('trabajoFormModal');
+            renderTrabajos();
+            renderTrabajoAdminList();
+            alert('Trabajo guardado');
+        }
+
+        function deleteTrabajo(id) {
+            if (confirm('¿Eliminar este trabajo?')) {
+                state.trabajos = state.trabajos.filter(t => t.id !== id);
+                renderTrabajos();
+                renderTrabajoAdminList();
+            }
+        }
+
+        function renderTrabajoAdminList() {
+            const list = document.getElementById('trabajoAdminList');
+            list.innerHTML = state.trabajos.map(trabajo => `
+                <li class="trabajo-admin-item">
+                    <span>${trabajo.title}</span>
+                    <div>
+                        <button class="btn" style="padding: 0.3rem 0.8rem; margin-right: 0.5rem;" onclick="openTrabajoForm(${trabajo.id})">Editar</button>
+                        <button class="btn btn-danger" style="padding: 0.3rem 0.8rem;" onclick="deleteTrabajo(${trabajo.id})">Eliminar</button>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        // Renderizado de trabajos
+        function renderFilters() {
+            const filters = document.getElementById('filters');
+            const allCategories = ['Todas', ...state.categories];
+            filters.innerHTML = allCategories.map(cat => `
+                <button class="filter-btn ${state.currentFilter === cat ? 'active' : ''}" 
+                        onclick="filterTrabajos('${cat}')">${cat}</button>
+            `).join('');
+        }
+
+        function filterTrabajos(category) {
+            state.currentFilter = category;
+            renderFilters();
+            renderTrabajos();
+        }
+
+        function renderTrabajos() {
+            const grid = document.getElementById('trabajosGrid');
+            let filteredTrabajos = state.currentFilter === 'Todas' 
+                ? state.trabajos 
+                : state.trabajos.filter(t => t.category === state.currentFilter);
+
+            filteredTrabajos.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            grid.innerHTML = filteredTrabajos.map(trabajo => `
+                <div class="trabajo-card" onclick="${state.isAdmin ? `openTrabajoForm(${trabajo.id})` : ''}">
+                    <img src="${trabajo.image}" alt="${trabajo.title}" class="trabajo-img">
+                    <div class="trabajo-content">
+                        <div class="trabajo-header">
+                            <h3 class="trabajo-title">${trabajo.title}</h3>
+                            <span class="trabajo-category">${trabajo.category}</span>
+                        </div>
+                        <p class="trabajo-date">📅 ${new Date(trabajo.date).toLocaleDateString('es-MX', { year: 'numeric', month: 'long',
